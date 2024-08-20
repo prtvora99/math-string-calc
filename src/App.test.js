@@ -21,3 +21,15 @@ test("inputVal state is updated on input change", () => {
   // check if the value is updating correctly
   expect(inputEl.value).toBe("1,2,3");
 });
+
+test("should show sum after clicking on button", () => {
+  render(<App />);
+  const inputEl = screen.getByRole("textbox");
+  fireEvent.change(inputEl, { target: { value: "1,2,3" } });
+
+  const buttonEl = screen.getByText("Calculate");
+  fireEvent.click(buttonEl);
+
+  const sumText = screen.getByText("Sum is:: 6");
+  expect(sumText).toBeInTheDocument();
+});
